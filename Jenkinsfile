@@ -4,7 +4,14 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'mvn --version'
+                sh 'mvn compile'
+            }
+        }
+        stage('test') {
+            steps {
+                retry(3) {
+                    sh 'mvn test'
+                }
             }
         }
     }
